@@ -14,13 +14,13 @@ function setup() {
     question1 = new Question("Quel est ton péché mignon ?",
         [{
                 text: "Chocolat",
-                psycho: -3,
-                empathie: 3
+                gaga: -3,
+                ariana: 3
             },
             {
                 text: "Glace",
-                psycho: 10,
-                empathie: -10
+                gaga: 10,
+                billie: -10
             }
 
             {
@@ -46,7 +46,7 @@ function setup() {
             }
 
             {
-                text: "BTS",
+                text: "Ariana Grande",
                 gaga: 10,
                 ariana: -10
             }
@@ -87,7 +87,7 @@ function setup() {
                 ariana: 3
             },
             {
-                text: "Montage",
+                text: "Montagne",
                 billie: 10,
                 ariana: -10
             }
@@ -104,22 +104,22 @@ function setup() {
             },
             {
                 text: "Sushi",
-                psycho: 10,
-                empathie: -10
+                ariana: 10,
+                gaga: -10
             }
         ]
     )
     questions.push(question5);
 
 
-    question6 = new Question("Ton plat préféré",
+    question6 = new Question("Vinaigre sur tes frites",
         [{
-                text: "Pizza",
-                psycho: -3,
+                text: "JAMAIS",
+                billie: -3,
                 gaga: 3
             },
             {
-                text: "Sushi",
+                text: "OUI",
                 ariana: 10,
                 billie: -10
             }

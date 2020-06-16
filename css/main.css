@@ -1,0 +1,50 @@
+body {
+    background-color: #33ccff;
+    font-size: 20px;
+}
+
+h1 {
+    font-family: Helvetica;
+    color: White;
+}
+
+p {
+    font-family: Helvetica;
+    color: ;
+}
+
+button {
+    font-family: Helvetica;
+    background-color: white;
+    padding: 30px 30px 30px 30px;
+}
+
+.grid {
+    width: 600px;
+    height: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 100px 100px 1500px 100px;
+    border: 2px solid #fff;
+}
+
+.grid h1 {
+    font-family: Helvetica;
+    background-color: #33ccff;
+    font-size: 60px;
+    text-align: center;
+    color: #fff;
+    padding: 2px 0px;
+}
+
+#score {
+    background-color: #33ccff;
+    text-align: center;
+    font-size: 30px;
+}
+
+.grid #question {
+    font-family: Helvetica;
+    font-size: 30px;
+    background-color: #33ccff;
+}
