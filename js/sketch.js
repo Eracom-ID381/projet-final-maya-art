@@ -7,25 +7,26 @@ let questions = []
 let currentQuestion;
 
 let radio;
+let questionElement;
+let nextButton;
 
+let psychoResults = 0;
+let empathieResults = 0;
+
+
+//DEBUT QUESTION
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    question1 = new Question("Quel est ton péché mignon ?",
+    question1 = new Question("Quel est ton plât préféré ??",
         [{
-                text: "Chocolat",
-                gaga: -3,
-                ariana: 3
+                text: "Pizza",
+                Gaga: -3,
+                empathie: 3
             },
             {
-                text: "Glace",
-                gaga: 10,
-                billie: -10
-            }
-
-            {
-                text: "Chips",
-                psycho: 10,
+                text: "Sushi",
+                Gaga: 10,
                 empathie: -10
             }
         ]
@@ -33,22 +34,16 @@ function setup() {
 
     questions.push(question1);
 
-    question2 = new Question("Tu écouterais plutôt :",
+    question2 = new Question("Tu écouterais plutôt ",
         [{
-                text: "Billie Eilish",
-                ariana: -3,
-                billie: 3
+                text: "Lady Gaga",
+                Gaga: -3,
+                empathie: 3
             },
             {
-                text: "Lady Gaga",
-                gaga: 10,
-                billie: -10
-            }
-
-            {
                 text: "Ariana Grande",
-                gaga: 10,
-                ariana: -10
+                Gaga: 10,
+                empathie: -10
             }
         ]
     )
@@ -56,107 +51,47 @@ function setup() {
     questions.push(question2);
 
 
-    question3 = new Question("Niveau Sneakers :",
+    question3 = new Question("Cet été tu pars ...",
         [{
-                text: "Nike Air Force 1",
-                gaga: -3,
-                billie: 3
-
+                text: "Plage",
+                Gaga: -3,
+                empathie: 3
             },
             {
-                text: "Vans",
-                ariana: 10,
-                billie: -10
-            }
-
-            {
-                text: "Converse",
-                billie: 5,
-                ariana: -5
-
+                text: "Montagne",
+                Gaga: 10,
+                empathie: -10
             }
         ]
     )
     questions.push(question3);
 
 
-    question4 = new Question("Cet été c'est ...",
+    question4 = new Question("Plutôt Vans ou Adidas",
         [{
-                text: "Plage",
-                gaga: -3,
-                ariana: 3
+                text: "Vans",
+                Gaga: "-3",
+                empathie: 3
             },
             {
-                text: "Montagne",
-                billie: 10,
-                ariana: -10
+                text: "Adidas",
+                Gaga: 10,
+                empathie: "-10"
             }
         ]
     )
     questions.push(question4);
 
-
-    question5 = new Question("Ton plat préféré",
-        [{
-                text: "Pizza",
-                billie: -3,
-                ariana: 3
-            },
-            {
-                text: "Sushi",
-                ariana: 10,
-                gaga: -10
-            }
-        ]
-    )
-    questions.push(question5);
-
-
-    question6 = new Question("Vinaigre sur tes frites",
-        [{
-                text: "JAMAIS",
-                billie: -3,
-                gaga: 3
-            },
-            {
-                text: "OUI",
-                ariana: 10,
-                billie: -10
-            }
-        ]
-    )
-    questions.push(question6);
-
-    question6 = new Question("Une bonne soirée d'été selon toi ?",
-        [{
-                text: "Regarder le coucher de soleil en sirotant un cocktail",
-                billie: -3,
-                ariana: 3
-            },
-            {
-                text: "Sortir danser jusqu'au bout de la nuit",
-                gaga: 10,
-                billie: 10,
-                ariana: -10
-            }
-        ]
-    )
-    questions.push(question6);
-
-
-
-
-    let nextButton = createButton('Next Question')
-    nextButton.position(width / 2, height / 2 + 200)
-    nextButton.mousePressed(changeQuestion);
-
     let r = int(random(0, 3));
     currentQuestion = questions[r];
     currentQuestion.afficher();
 }
+//FIN QUESTIONS
+
+
 
 function draw() {
-
+    console.log("Gaga results: " + psychoResults + " / " + "empathie results: " + empathieResults);
 }
 
 function windowResized() {
@@ -164,8 +99,13 @@ function windowResized() {
 }
 
 function changeQuestion() {
+    let val = radio.value().split(',');
+    psychoResults += int(val[0]);
+    empathieResults += int(val[1]);
     background(255);
     radio.remove();
+    questionElement.remove();
+    nextButton.remove();
     let r = int(random(0, 3));
     currentQuestion = questions[r];
     currentQuestion.afficher();
@@ -177,11 +117,25 @@ class Question {
         this.answers = _answers;
     }
 
+
+
+    //PAGE DE RESULTATS
+    //function setup() {
+    //    answer1 = final Answer("Rain on Me by Lady gaga feat. Ariana Grande",
+    //[{
+    // text: "Blah..."
+    //  }]
+    //}
+
     afficher() {
-        text(this.text, width / 2, height / 2);
+
+        questionElement = createP(this.text)
         radio = createRadio();
         for (let i = 0; i < this.answers.length; i++) {
-            radio.option(this.answers[i].text);
+            radio.option(this.answers[i].text, [this.answers[i].Gaga, this.answers[i].empathie]);
         }
+
+        nextButton = createButton('Submit');
+        nextButton.mousePressed(changeQuestion);
     }
 }
