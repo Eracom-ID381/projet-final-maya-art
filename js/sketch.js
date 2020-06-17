@@ -13,12 +13,13 @@ let nextButton;
 let psychoResults = 0;
 let empathieResults = 0;
 
-
-//DEBUT QUESTION
+let questionsAnswered = 0;
+//START QUIZ
+//DEBUT QUESTION- Array
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    question1 = new Question("Quel est ton plât préféré ??",
+    question1 = new Question("Ton plat préféré ?",
         [{
                 text: "Pizza",
                 Gaga: -3,
@@ -51,7 +52,7 @@ function setup() {
     questions.push(question2);
 
 
-    question3 = new Question("Cet été tu pars ...",
+    question3 = new Question("Cet été tu pars",
         [{
                 text: "Plage",
                 Gaga: -3,
@@ -65,33 +66,15 @@ function setup() {
         ]
     )
     questions.push(question3);
-
-
-    question4 = new Question("Plutôt Vans ou Adidas",
-        [{
-                text: "Vans",
-                Gaga: "-3",
-                empathie: 3
-            },
-            {
-                text: "Adidas",
-                Gaga: 10,
-                empathie: "-10"
-            }
-        ]
-    )
-    questions.push(question4);
-
     let r = int(random(0, 3));
     currentQuestion = questions[r];
     currentQuestion.afficher();
 }
 //FIN QUESTIONS
-
-
+//END QUIZ
 
 function draw() {
-    console.log("Gaga results: " + psychoResults + " / " + "empathie results: " + empathieResults);
+    console.log(questionsAnswered);
 }
 
 function windowResized() {
@@ -99,16 +82,23 @@ function windowResized() {
 }
 
 function changeQuestion() {
-    let val = radio.value().split(',');
-    psychoResults += int(val[0]);
-    empathieResults += int(val[1]);
-    background(255);
-    radio.remove();
-    questionElement.remove();
-    nextButton.remove();
-    let r = int(random(0, 3));
-    currentQuestion = questions[r];
-    currentQuestion.afficher();
+    if (questionsAnswered > 4) {
+        let results = createP("A)Rain On me de Lady Gaga " + psychoResults + "B)Supalonely de BENEE " + empathieResults);
+    } else {
+        questionsAnswered++;
+        let val = radio.value().split(',');
+        psychoResults += int(val[0]);
+        empathieResults += int(val[1]);
+        background(255);
+        radio.remove();
+        questionElement.remove();
+        nextButton.remove();
+        let r = int(random(0, 3));
+        currentQuestion = questions[r];
+        currentQuestion.afficher();
+    }
+
+
 }
 
 class Question {
@@ -117,15 +107,11 @@ class Question {
         this.answers = _answers;
     }
 
+    //RESULTATS
+    //function showResults(questions, quizContainer, resultsContainer) {
 
-
-    //PAGE DE RESULTATS
-    //function setup() {
-    //    answer1 = final Answer("Rain on Me by Lady gaga feat. Ariana Grande",
-    //[{
-    // text: "Blah..."
-    //  }]
-    //}
+    // gather answer containers from our quiz
+    //var answerContainers = quizContainer.querySelectorAll('.answers');
 
     afficher() {
 
@@ -137,5 +123,6 @@ class Question {
 
         nextButton = createButton('Submit');
         nextButton.mousePressed(changeQuestion);
+
     }
 }
